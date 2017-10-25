@@ -1,0 +1,43 @@
+﻿@model Booking.Models.Cars
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cars</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CarModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarPlate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarPlate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarActive)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CarId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BookingModelStoreContainer" CdmEntityContainer="BookingEntities">
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="BookingModel.Bookings">
+        <MappingFragment StoreEntitySet="Bookings">
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+          <ScalarProperty Name="BookingStart" ColumnName="BookingStart" />
+          <ScalarProperty Name="BookingEnd" ColumnName="BookingEnd" />
+          <ScalarProperty Name="FK_CarID" ColumnName="FK_CarID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="BookingModel.Cars">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="CarModel" ColumnName="CarModel" />
+          <ScalarProperty Name="CarPlate" ColumnName="CarPlate" />
+          <ScalarProperty Name="CarActive" ColumnName="CarActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="BookingModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

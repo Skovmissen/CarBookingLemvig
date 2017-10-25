@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bookings">
+    <Key>
+      <PropertyRef Name="BookingID" />
+    </Key>
+    <Property Name="BookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BookingDate" Type="DateTime" Precision="3" />
+    <Property Name="BookingStart" Type="DateTime" Precision="3" />
+    <Property Name="BookingEnd" Type="DateTime" Precision="3" />
+    <Property Name="FK_CarID" Type="Int32" />
+    <NavigationProperty Name="Cars" Relationship="Self.FK_Bookings_Cars" FromRole="Bookings" ToRole="Cars" />
+  </EntityType>
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="CarId" />
+    </Key>
+    <Property Name="CarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarPlate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarActive" Type="Boolean" />
+    <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_Cars" FromRole="Cars" ToRole="Bookings" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Bookings_Cars">
+    <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+    <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cars">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="FK_CarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BookingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bookings" EntityType="Self.Bookings" />
+    <EntitySet Name="Cars" EntityType="Self.Cars" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_Bookings_Cars" Association="Self.FK_Bookings_Cars">
+      <End Role="Cars" EntitySet="Cars" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

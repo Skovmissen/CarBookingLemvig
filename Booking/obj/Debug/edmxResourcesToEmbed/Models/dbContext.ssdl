@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bookings">
+    <Key>
+      <PropertyRef Name="BookingID" />
+    </Key>
+    <Property Name="BookingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_UserID" Type="nvarchar" MaxLength="128" />
+    <Property Name="BookingDate" Type="datetime" />
+    <Property Name="BookingStart" Type="datetime" />
+    <Property Name="BookingEnd" Type="datetime" />
+    <Property Name="FK_CarID" Type="int" />
+  </EntityType>
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="CarId" />
+    </Key>
+    <Property Name="CarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarModel" Type="nvarchar" MaxLength="50" />
+    <Property Name="CarPlate" Type="nvarchar" MaxLength="50" />
+    <Property Name="CarActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Bookings_Cars">
+    <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+    <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cars">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="FK_CarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BookingModelStoreContainer">
+    <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Bookings_Cars" Association="Self.FK_Bookings_Cars">
+      <End Role="Cars" EntitySet="Cars" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
